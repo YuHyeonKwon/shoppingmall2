@@ -108,7 +108,9 @@ public class MemberController {
 
     @GetMapping("/delete/{email}")
     public String deleteMember(@PathVariable String email) {
-        boolean deleted = memberService.remove(email);
+        
+    	@SuppressWarnings("unused")
+		boolean deleted = memberService.remove(email);
         return "redirect:/member/list";
     }
 }

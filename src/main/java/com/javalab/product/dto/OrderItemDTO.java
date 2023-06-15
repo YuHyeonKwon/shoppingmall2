@@ -28,6 +28,6 @@ public class OrderItemDTO {
     private Integer quantity;
 
     // 가격은 상품 엔티티 참조
-    private Integer price=0;
+    private Integer price;
 
 }

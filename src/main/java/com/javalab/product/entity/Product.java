@@ -1,6 +1,5 @@
 package com.javalab.product.entity;
 
-import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -52,7 +51,7 @@ public class Product extends BaseEntity{
 	private String productName;
 	
 	@Column(columnDefinition = "integer(10) default 0")
-	private Integer price = 0;
+	private Integer price;
 	
 	// 외래키 - 카테고리 테이블 참조함.
     @ManyToOne(fetch = FetchType.LAZY)
