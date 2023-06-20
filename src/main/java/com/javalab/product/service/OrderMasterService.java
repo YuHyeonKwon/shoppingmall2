@@ -30,17 +30,20 @@ public interface OrderMasterService {
 		Member member = Member.builder()
 				.email(orderMasterDTO.getEmail())
 				.build();
-		
-		return OrderMaster.builder().
-				address(orderMasterDTO.getAddress())
+		return OrderMaster.builder()
+				.address(orderMasterDTO.getAddress())
+				.orderItems(orderMasterDTO.getOrderItems().stream()
+	                    .map(orderItem -> orderItemDtoToEntity(orderItem))
+	                    .collect(Collectors.toList()))
 				.member(member)
+				.totalAmt(orderMasterDTO.getTotalAmt())
 				.build();
 	}
 
 	// 데이터베이스에 조회한 주문정보 엔티티 -> 주문DTO로 전환
 	default OrderMasterDTO entityToDto(OrderMaster orderMaster) {
 	    return OrderMasterDTO.builder()
-	            .orderId(orderMaster.getOrderId())
+	    		.orderId(orderMaster.getOrderId())
 	            .email(orderMaster.getMember().getEmail())
 	            .name(orderMaster.getMember().getName())
 	            .address(orderMaster.getAddress())
@@ -60,7 +63,7 @@ public interface OrderMasterService {
 				.orderItemId(orderItem.getOrderItemId())
 				.productId(orderItem.getProduct().getProductId())
 				.quantity(orderItem.getQuantity())
-				.price(orderItem.getProduct().getPrice())
+				.totalAmt(orderItem.getTotalAmt())
 				.build();
 	}
 
@@ -71,9 +74,9 @@ public interface OrderMasterService {
 	            .orderItemId(orderItemDTO.getOrderItemId())
 	            .product(Product.builder()
 	            		.productId(orderItemDTO.getProductId())
-	            		.price(orderItemDTO.getPrice())
 	            		.build())
 	            .quantity(orderItemDTO.getQuantity())
+	            .totalAmt(orderItemDTO.getTotalAmt())
 	            .build();
 	}
 	

@@ -60,6 +60,8 @@ public class MemberServiceImpl implements MemberService {
         member.ifPresent(existingMember -> {
             existingMember.setPassword(memberDTO.getPassword());
             existingMember.setName(memberDTO.getName());
+            existingMember.setEmail(memberDTO.getEmail());
+            existingMember.setAddress(memberDTO.getAddress());
             memberRepository.save(existingMember);
         });
     }

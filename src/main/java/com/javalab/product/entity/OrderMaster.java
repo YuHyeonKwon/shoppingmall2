@@ -1,5 +1,6 @@
 package com.javalab.product.entity;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +14,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -45,11 +48,9 @@ public class OrderMaster extends BaseEntity {
     private Member member;
     
     // 주문 상품들
-    @Builder.Default
     @OneToMany(mappedBy = "orderMaster", cascade = CascadeType.ALL)
     private List<OrderItem> orderItems = new ArrayList<>();
     
     // 총 주문금액
-    @Builder.Default
-    private Integer totalAmt = 0;
+    private Integer totalAmt;
 }

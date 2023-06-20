@@ -2,10 +2,19 @@ package com.javalab.product.dto;
 
 import java.time.LocalDateTime;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 
+import com.javalab.product.entity.Category;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -35,12 +44,12 @@ public class ProductDTO {
 	private Integer productId;
 
 	@NotNull
-	@Size(min = 8, max = 50, message = "상품명은 8~50자입니다")
+	@Size(min = 3, max = 50, message = "상품명은 8~50자입니다")
 	private String productName;
 
 	@NotNull
 	@Positive(message = "상품 가격은 양수여야 합니다.")
-	private Integer price;
+	private Integer price = 0;
 
 	//@NotNull
 	//private Category category;

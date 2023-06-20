@@ -17,6 +17,7 @@ import com.javalab.product.dto.CategoryDTO;
 import com.javalab.product.dto.PageRequestDTO;
 import com.javalab.product.dto.PageResultDTO;
 import com.javalab.product.dto.ProductDTO;
+import com.javalab.product.entity.Category;
 import com.javalab.product.entity.Product;
 import com.javalab.product.service.CategoryService;
 import com.javalab.product.service.ProductService;
@@ -213,8 +214,7 @@ public class ProductController {
     @GetMapping("/delete/{productId}")
     public String deleteCategory(@PathVariable Integer productId) {
     	
-        @SuppressWarnings("unused")
-		boolean deleted = productService.remove(productId);
+        boolean deleted = productService.remove(productId);
         
         return "redirect:/category/list";
     }

@@ -27,7 +27,8 @@ public class OrderItemDTO {
     @Positive(message = "수량은 양수여야 합니다.")
     private Integer quantity;
 
-    // 가격은 상품 엔티티 참조
-    private Integer price;
+
+//     가격은 상품 엔티티 참조
+    private Integer totalAmt;
 
 }

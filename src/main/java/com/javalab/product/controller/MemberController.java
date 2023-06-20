@@ -51,6 +51,8 @@ public class MemberController {
                              BindingResult bindingResult,
                              PageRequestDTO pageRequestDTO,
                              Model model) {
+    	
+    	
         model.addAttribute("member", new Member());
     }
 
@@ -102,15 +104,12 @@ public class MemberController {
         }
 
         memberService.modify(memberDTO);
-
-        return "redirect:/member/list";
+        return "redirect:/member/read?email=" + memberDTO.getEmail();
     }
 
     @GetMapping("/delete/{email}")
     public String deleteMember(@PathVariable String email) {
-        
-    	@SuppressWarnings("unused")
-		boolean deleted = memberService.remove(email);
+        boolean deleted = memberService.remove(email);
         return "redirect:/member/list";
     }
 }

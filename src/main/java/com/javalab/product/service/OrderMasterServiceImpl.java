@@ -57,33 +57,45 @@ public class OrderMasterServiceImpl implements OrderMasterService {
      * 저장
      * @Transactional 
      *  : 마스터 저장후 아이템 저장을 하나의 트랜잭션으로 묶음
-     *  ServiceLayer에서 설정 작업이 하나라도 완료되지 않으면 rollback
      */
     @Override
     @Transactional
     public void register(OrderMasterDTO orderMasterDTO) {
     	
-        // [1] OrderMasterDTO DTO -> OrderMaster Entity 변환
+    	/*
+    	 * !!! orderMasterDTO가 값을 못 가져옴.
+    	 */
+        // OrderMasterDTO DTO -> OrderMaster Entity 변환
         OrderMaster orderMaster = dtoToEntity(orderMasterDTO);
-
-        log.info("ServiceImpl register : " + orderMaster.toString());
+        // 이 부분에서 totalAmt 안들어감
         
+        log.info("ServiceImpl register : " + orderMaster.toString());
         // 우선 OrderMaster 저장
-        // OrderId가 저장된다.
-        OrderMaster savedOrderMaster = orderMasterRepository.save(orderMaster);
-
-        // OrderItemDTO -> OrderItem Entity 변환 및 연결  Item 만들기
+        /*
+         *   OrderMaster를 먼저 저장하고 저장할 때의 내부 정보를 활용하기 위해서
+         *   변수에 반환을 받아 놓음.
+         */
+        
         List<OrderItem> orderItems = orderMasterDTO.getOrderItems().stream()
                 .map(item -> {
-                    OrderItem orderItem = orderItemDtoToEntity(item);	//orderItemDtoToEntity : DTO -> entity로 변환
+                    OrderItem orderItem = orderItemDtoToEntity(item);
                     // 저장된 엔티티를 할당, 거기에 orderId 있음, 
                     // 그 orderId가 orderItem테이블에 들어감
-                    orderItem.setOrderMaster(savedOrderMaster); 
+                    orderItem.setOrderMaster(orderMaster); 
                     return orderItem;
                 }).collect(Collectors.toList());
+        
+        orderMaster.setOrderItems(orderItems);
+        OrderMaster savedOrderMaster = orderMasterRepository.save(orderMaster);
+        // OrderItemDTO -> OrderItem Entity 변환 및 연결
+        
 
         // OrderItem들 저장
-        orderItemRepository.saveAll(orderItems);	//Spring JPA 가 알아서 저장해준다.
+        /*
+         *   기본적으로 만들어져 있는 saveAll 메소드
+         *   : save와의 차이점은 Iterator를 통해서 모든 객체를 
+         *   한 번에 받아서 각각 저장함.
+         */
     }
     
     /* 

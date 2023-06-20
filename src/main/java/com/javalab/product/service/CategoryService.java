@@ -47,8 +47,15 @@ public interface CategoryService {
 							.categoryId(entity.getCategoryId())
 							.categoryName(entity.getCategoryName())
 							.description(entity.getDescription())
-							.regDate(entity.getRegDate())
+							.regDate(entity.getRegDate()) 
 							.build();
+							/*
+							 *   getRegDate()는 BaseEntity에 선언된 자동 감사 목적의 메소드이다.
+							 *   만약 BaseEntity의 클래스 접근제한자가 default라면 현재 CategoryService는
+							 *   다른 패키지에 존재하므로 접근할 수 없게 된다. 
+							 *   
+							 *   만일 지금처럼 다른 패키지의 클래스에서 접근하려면 public으로 선언해야 한다.
+							 */
 
 		return dto;
 	}

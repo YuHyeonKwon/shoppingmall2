@@ -1,5 +1,6 @@
 package com.javalab.product.entity;
 
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,6 +11,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.springframework.data.annotation.CreatedDate;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -49,9 +51,6 @@ public class Category  extends BaseEntity{
 	private Integer categoryId;
 	
 	@NotNull
-	@Size(min=8, 
-		  max=50, 
-		  message="카테고리명은 8~50자입니다")
 	@Column(length = 50, nullable=false)
 	private String categoryName;
 	

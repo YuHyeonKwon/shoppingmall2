@@ -185,8 +185,7 @@ public class CategoryController {
     @GetMapping("/delete/{categoryId}")
     public String deleteCategory(@PathVariable Integer categoryId) {
     	
-        @SuppressWarnings("unused")
-		boolean deleted = categoryService.remove(categoryId);
+        boolean deleted = categoryService.remove(categoryId);
         
         return "redirect:/category/list";
     }

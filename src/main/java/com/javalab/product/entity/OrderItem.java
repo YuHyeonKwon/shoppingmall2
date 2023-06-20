@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -37,7 +39,9 @@ public class OrderItem extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "productId")
     private Product product;
-
+    
     private Integer quantity;
     
+    private Integer totalAmt;
+
 }

@@ -4,7 +4,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import com.javalab.product.entity.Category;
+import com.javalab.product.service.CategoryService;
 
+import lombok.extern.slf4j.Slf4j;
 
 @Controller
 public class HomeController {

@@ -20,6 +20,7 @@ public interface MemberService {
         return Member.builder()
                 .email(memberDTO.getEmail())
                 .password(memberDTO.getPassword())
+                .address(memberDTO.getAddress())
                 .name(memberDTO.getName())
                 .build();
     }

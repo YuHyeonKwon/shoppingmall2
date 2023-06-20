@@ -15,8 +15,7 @@ public interface ProductService {
     ProductDTO read(Integer ProductId);    
     Product register(ProductDTO Product);			
     void modify(ProductDTO ProductDTO);
-	boolean remove(Integer ProductId); 
-	public List<ProductDTO> getList();
+	boolean remove(Integer ProductId);    
     
 	/*
 	 *  DTO --> Entity 전환을 위한 default 메소드
@@ -60,6 +59,7 @@ public interface ProductService {
 
 		return dto;
 	}
+	public List<ProductDTO> getList();
 	
 
 }
